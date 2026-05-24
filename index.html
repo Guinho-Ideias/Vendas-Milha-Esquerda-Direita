@@ -70,6 +70,7 @@
             margin-right: auto;
         }
 
+        /* O Container do Vídeo Realizado */
         .vsl-container {
             width: 100%;
             max-width: 800px;
@@ -86,12 +87,10 @@
             overflow: hidden;
         }
 
-        .vsl-container::after {
-            content: "▶ CLIQUE PARA VER O SISTEMA EM AÇÃO";
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        .vsl-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* --- BOTÕES --- */
@@ -401,7 +400,8 @@
             <p class="subheadline">Chega de perder dinheiro com palpites aleatórios. Aplique a <strong>Estratégia da Direita e Esquerda</strong> e feche 100% da sua milhar operando com inteligência e probabilidade a seu favor.</p>
             
             <div class="vsl-container">
-                </div>
+                <iframe src="https://www.youtube.com/embed/27VgV5KwuoI?rel=0&modestbranding=1" title="A Estratégia do Guinho" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
 
             <div class="cta-wrapper">
                 <a href="https://mpago.la/1qGVLaH" target="_blank" class="btn-buy">LIBERAR MEU ACESSO VIP AGORA</a>
@@ -584,31 +584,26 @@
         
         const temposFake = ["agora mesmo", "há 1 min", "agora mesmo", "há 2 min"];
         
-        // Som discreto de notificação (Link de um som leve)
         const somNotificacao = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-        somNotificacao.volume = 0.5; // Metade do volume para não assustar
+        somNotificacao.volume = 0.5;
 
         function mostrarNotificacao() {
             const toast = document.getElementById('salesToast');
             const nomeEl = document.getElementById('toastNome');
             const tempoEl = document.getElementById('toastTempo');
             
-            // Escolhe dados aleatórios
             const nomeAleatorio = nomesFake[Math.floor(Math.random() * nomesFake.length)];
             const tempoAleatorio = temposFake[Math.floor(Math.random() * temposFake.length)];
             
             nomeEl.textContent = nomeAleatorio;
             tempoEl.textContent = tempoAleatorio;
             
-            // Toca o som (Tratamento de erro se o navegador bloquear o Autoplay)
             somNotificacao.play().catch(erro => {
                 console.log("Som bloqueado pelo navegador. O usuário precisa interagir com a página primeiro.");
             });
             
-            // Mostra o popup
             toast.classList.add('show');
             
-            // Esconde após 6 segundos
             setTimeout(() => {
                 toast.classList.remove('show');
                 agendarProximaNotificacao(); 
@@ -620,7 +615,6 @@
             setTimeout(mostrarNotificacao, tempoEspera);
         }
 
-        // Mostra a primeira notificação 12 segundos após a página carregar
         setTimeout(mostrarNotificacao, 12000);
     </script>
 </body>
